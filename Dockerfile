@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16 AS build
+FROM node:24.15.0-alpine3.22 AS build
 
 # Build argument for enabling OIDC support
 ARG ENABLE_OIDC=false
@@ -15,7 +15,7 @@ RUN if [ "$ENABLE_OIDC" = "true" ]; then \
     && yarn build \
     && rm -rf /dockerbuild/lib/scripts
 
-FROM node:18-alpine3.16
+FROM node:24.15.0-alpine3.22
 
 # "localhost" doesn't mean much in a container, so we adjust our default to the common service name "mongo" instead
 # (and make sure the server listens outside the container, since "localhost" inside the container is usually difficult to access)
